@@ -2,6 +2,7 @@ package com.wd.tech.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.LoginBean;
+import com.wd.tech.hr.LivenessActivity;
 import com.wd.tech.presenter.TechPresenter;
 import com.wd.tech.util.RsaCoder;
 import com.wd.tech.widget.MyUrls;
@@ -75,6 +77,8 @@ public class LoginActivity extends BaseActivity<TechPresenter> {
             edit.putString("sid",((LoginBean) o).getResult().getSessionId());
             Toast.makeText(this, ((LoginBean) o).getMessage(), Toast.LENGTH_SHORT).show();
             edit.commit();
+            startActivity(LoginActivity.this, MainActivity.class);
+            finish();
         }
     }
 
@@ -88,12 +92,11 @@ public class LoginActivity extends BaseActivity<TechPresenter> {
             case R.id.eye:
                 break;
             case R.id.register:
+                startActivity(new Intent(this,RegisterActivity.class));
                 break;
             case R.id.login:
                 String phon = phone.getText().toString().trim();
                 String pw = pwd.getText().toString().trim();
-                Log.d("xxxxxx",phon+"");
-                Log.d("xxxxxx",pw+"");
                 boolean b = Pattern.matches("^1[3|5|7|8][0-9]{9}$", phon);
                 if (b){
                     /*if (TextUtils.isEmpty(phon)||TextUtils.isEmpty(pw)){
@@ -119,4 +122,15 @@ public class LoginActivity extends BaseActivity<TechPresenter> {
                 break;
         }
     }
+
+    // TODO: 2020/4/20 微信登录
+    public void wxlogin(View view) {
+
+    }
+    // TODO: 2020/4/20 虹软人脸识别登录
+    public void hrlogin(View view) {
+        LivenessActivity.flag = 2;
+        startActivity(new Intent(LoginActivity.this, LivenessActivity.class));
+    }
+
 }

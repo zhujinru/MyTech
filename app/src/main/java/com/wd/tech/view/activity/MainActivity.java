@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,13 +20,17 @@ import android.widget.TextView;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
+import com.wd.tech.bean.UserInfoBean;
 import com.wd.tech.presenter.TechPresenter;
+import com.wd.tech.util.NetUtil;
 import com.wd.tech.util.RsaCoder;
 import com.wd.tech.view.fragment.CommunityFragment;
 import com.wd.tech.view.fragment.ConsultFragment;
 import com.wd.tech.view.fragment.InfoFragment;
+import com.wd.tech.widget.MyUrls;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,7 +79,7 @@ public class MainActivity  extends BaseActivity<TechPresenter> {
     ImageView loginIv;
     @BindView(R.id.login)
     TextView login;
-
+    private SharedPreferences sp;
     @Override
     protected void initData() {
         //添加数据
@@ -129,7 +135,20 @@ public class MainActivity  extends BaseActivity<TechPresenter> {
         //默认页面
         rg.check(rg.getChildAt(0).getId());
         vp.setCurrentItem(0);
-        //点击登录
+        sp = getSharedPreferences("login.dp", MODE_PRIVATE);
+        if (sp.getBoolean("b",false)){
+            ll.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+            int uid = sp.getInt("uid", -1);
+            String sid = sp.getString("sid", "");
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("userId",uid);
+            map.put("sessionId",sid);
+            mPresenter.getHeadParams(MyUrls.BASE_BYID, UserInfoBean.class,map);
+        }else {
+            ll.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -155,7 +174,12 @@ public class MainActivity  extends BaseActivity<TechPresenter> {
 
     @Override
     public void onSuccess(Object o) {
-
+        if (o instanceof UserInfoBean && TextUtils.equals("0000",((UserInfoBean) o).getStatus())){
+            UserInfoBean.ResultBean result = ((UserInfoBean) o).getResult();
+            NetUtil.getInstance().getCiclePhoto(result.getHeadPic(),headPic);
+            name.setText(result.getNickName());
+            dersign.setText(result.getSignature());
+        }
     }
 
     @Override
@@ -168,8 +192,6 @@ public class MainActivity  extends BaseActivity<TechPresenter> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_iv:
-                startActivity(this, LoginActivity.class);
-                break;
             case R.id.login:
                 startActivity(this, LoginActivity.class);
                 break;

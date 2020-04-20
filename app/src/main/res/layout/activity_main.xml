@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/rg"
                     android:orientation="horizontal"
-                    android:layout_height="40dp">
+                    android:layout_height="60dp">
                     <RadioButton
                         android:id="@+id/rb1"
                         android:layout_width="0dp"

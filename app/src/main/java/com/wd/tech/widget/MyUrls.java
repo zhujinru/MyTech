@@ -16,4 +16,8 @@ public interface MyUrls {
     String url=baseUrl();
     //登录 post phone pwd
     String BASE_LOGIN="techApi/user/v1/login";
+    //注册 post phone nickName pwd
+    String REGISTER_URL = "techApi/user/v1/register";
+    //根据ID查询信息
+    String BASE_BYID="techApi/user/verify/v1/getUserInfoByUserId";
 }
