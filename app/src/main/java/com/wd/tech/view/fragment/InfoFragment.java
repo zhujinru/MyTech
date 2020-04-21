@@ -11,14 +11,9 @@ import android.view.ViewGroup;
 import com.wd.tech.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 消息
  */
 public class InfoFragment extends Fragment {
-
-    public InfoFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

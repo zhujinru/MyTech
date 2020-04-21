@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.wd.tech.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 咨询
  */
 public class ConsultFragment extends Fragment {
 

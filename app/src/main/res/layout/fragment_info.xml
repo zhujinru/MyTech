@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".view.fragment.InfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+   <RadioGroup
+       android:layout_marginTop="@dimen/dp_20"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:gravity="center">
+       <RadioButton
+           android:layout_width="@dimen/dp_80"
+           android:layout_height="@dimen/dp_30"
+           android:button="@null"
+           android:text="消息"
+           android:gravity="center"
+           android:background="@drawable/message_checked"/>
+       <RadioButton
+           android:layout_width="@dimen/dp_80"
+           android:layout_height="@dimen/dp_30"
+           android:button="@null"
+           android:text="联系人"
+           android:gravity="center"
+           android:checked="true"
+           android:background="@drawable/message_checked"/>
+   </RadioGroup>
+<androidx.viewpager.widget.ViewPager
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</LinearLayout>
