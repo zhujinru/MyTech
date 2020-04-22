@@ -22,4 +22,7 @@ public interface MyUrls {
     String BASE_BYID="techApi/user/verify/v1/getUserInfoByUserId";
     //查询用户的好友通知记录 get  page  count  uid sid
     String Friend_Notice="techApi/chat/verify/v1/findFriendNoticePageList";
+    //资讯banner
+    String BASE_BANNER="techApi/information/v1/bannerShow";
+    String BASE_CONSULTSHOW="techApi/information/v1/infoRecommendList";
 }
