@@ -18,10 +18,7 @@ import com.wd.tech.presenter.TechPresenter;
 import com.wd.tech.util.NetUtil;
 import com.wd.tech.view.activity.MainActivity;
 import com.wd.tech.widget.MyUrls;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-import com.youth.banner.loader.ImageLoader;
+
 
 import java.io.Reader;
 import java.security.MessageDigest;
