@@ -20,4 +20,7 @@ public interface MyUrls {
     String REGISTER_URL = "techApi/user/v1/register";
     //根据ID查询信息
     String BASE_BYID="techApi/user/verify/v1/getUserInfoByUserId";
+    //资讯banner
+    String BASE_BANNER="techApi/information/v1/bannerShow";
+    String BASE_CONSULTSHOW="techApi/information/v1/infoRecommendList";
 }
