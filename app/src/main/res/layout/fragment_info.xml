@@ -5,30 +5,49 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".view.fragment.InfoFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_20">
+        <RadioGroup
+            android:id="@+id/info_rg"
+            android:layout_width="@dimen/dp_160"
+            android:layout_height="@dimen/dp_30"
+            android:orientation="horizontal"
+            android:background="@drawable/style_message_select2"
+            android:layout_centerInParent="true">
+            <RadioButton
+                android:id="@+id/info_message"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:button="@null"
+                android:text="消息"
+                android:gravity="center"
+                android:checked="true"
+                android:textColor="@drawable/textcolor"
+                android:background="@drawable/message_checked"/>
+            <RadioButton
+                android:id="@+id/info_man"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_30"
+                android:button="@null"
+                android:text="联系人"
+                android:textColor="@drawable/textcolor"
+                android:gravity="center"
+                android:background="@drawable/message_checked"/>
+        </RadioGroup>
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@mipmap/common_nav_btn_add_n_hdpi"/>
+    </RelativeLayout>
 
-   <RadioGroup
-       android:layout_marginTop="@dimen/dp_20"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:gravity="center">
-       <RadioButton
-           android:layout_width="@dimen/dp_80"
-           android:layout_height="@dimen/dp_30"
-           android:button="@null"
-           android:text="消息"
-           android:gravity="center"
-           android:background="@drawable/message_checked"/>
-       <RadioButton
-           android:layout_width="@dimen/dp_80"
-           android:layout_height="@dimen/dp_30"
-           android:button="@null"
-           android:text="联系人"
-           android:gravity="center"
-           android:checked="true"
-           android:background="@drawable/message_checked"/>
-   </RadioGroup>
 <androidx.viewpager.widget.ViewPager
+    android:id="@+id/info_vp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 </LinearLayout>

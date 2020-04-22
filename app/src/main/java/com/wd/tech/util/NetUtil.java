@@ -113,6 +113,7 @@ public class NetUtil {
         Glide.with(iv).load(url)
                 .error(R.mipmap.ic_launcher)
                 .placeholder(R.mipmap.ic_launcher_round)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
                 .into(iv);
     }
     //获取圆形图片
@@ -158,7 +159,7 @@ public class NetUtil {
     }
     //get有参
     public void getHeadParams(String url, final Class cls, HashMap<String,Object> map, final ICallback iCallback){
-        api.getDoParams(url,map).subscribeOn(Schedulers.io())
+        api.getHeadParams(url,map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
@@ -187,8 +188,9 @@ public class NetUtil {
 
                     }
                 });
-    }public void getDoParams(String url, final Class cls, HashMap<String,Object> map, final ICallback iCallback){
-        api.getHeadParams(url,map).subscribeOn(Schedulers.io())
+    }
+    public void getDoParams(String url, final Class cls, HashMap<String,Object> map, final ICallback iCallback){
+        api.getDoParams(url,map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override

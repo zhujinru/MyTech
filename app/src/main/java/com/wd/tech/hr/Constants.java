@@ -1,8 +1,8 @@
 package com.wd.tech.hr;
 
 /**
- * data:2020/4/17
- * author:王江伟(DJ慢羊羊)
+ * date:2020/4/20
+ * author:朱金茹(Lenovo)
  * function:
  */
 public class Constants {
