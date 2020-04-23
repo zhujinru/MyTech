@@ -1,4 +1,4 @@
-package com.wd.tech.adpter;
+package com.wd.tech.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,11 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.wd.tech.R;
 import com.wd.tech.bean.ConsultShowBean;
 import com.wd.tech.util.NetUtil;
@@ -19,6 +14,7 @@ import com.wd.tech.util.NetUtil;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,8 +54,7 @@ public class ConsultAdpter extends RecyclerView.Adapter<ConsultAdpter.ViewHolder
         holder.consultItemName.setText(list.get(position).getSource());
         holder.consultItemNeirong.setText(list.get(position).getSummary());
         holder.consultItemTime.setText(list.get(position).getReleaseTime()+"");
-
-        NetUtil.getInstance().getCiclePhoto(list.get(position).getThumbnail(),holder.consultItemImage);
+        NetUtil.getInstance().getPhoto(list.get(position).getThumbnail(),holder.consultItemImage);
 
     }
 
@@ -88,5 +83,13 @@ public class ConsultAdpter extends RecyclerView.Adapter<ConsultAdpter.ViewHolder
         }
     }
 
+    OnClickListeners mOnClickListeners;
 
+    public void setOnClickListeners(OnClickListeners onClickListeners) {
+        mOnClickListeners = onClickListeners;
+    }
+
+    public  interface OnClickListeners{
+        void onClick(int movieId, int status);
+    }
 }

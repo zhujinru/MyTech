@@ -1,32 +1,25 @@
 package com.wd.tech.view.fragment;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 
 
-import com.bumptech.glide.Glide;
 import com.stx.xhb.androidx.XBanner;
 import com.wd.tech.R;
-import com.wd.tech.adpter.ConsultAdpter;
+import com.wd.tech.view.adapter.ConsultAdpter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.BannerBean;
 import com.wd.tech.bean.ConsultShowBean;
 import com.wd.tech.contract.TechContract;
 import com.wd.tech.presenter.TechPresenter;
 import com.wd.tech.util.NetUtil;
-import com.wd.tech.view.activity.MainActivity;
 import com.wd.tech.widget.MyUrls;
 
 
-import java.io.Reader;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -68,8 +61,9 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
         HashMap<String, Object> maps = new HashMap<>();
         maps.put("plateId",1);
         maps.put("page",1);
-        maps.put("count",10);
+        maps.put("count",5);
     mPresenter.getDoParams(MyUrls.BASE_CONSULTSHOW,ConsultShowBean.class,maps);
+    mPresenter.dltNoParams(MyUrls.BASE_BANNER,BannerBean.class);
     }
 
     @Override
@@ -96,6 +90,10 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
         recyles.setLayoutManager(linearLayoutManager);
         ConsultAdpter adpter=new ConsultAdpter(list,getActivity());
         recyles.setAdapter(adpter);
+        if (o instanceof ConsultShowBean) {
+            list.clear();
+            list.addAll(((ConsultShowBean) o).getResult());
+        }
     }
 
 
