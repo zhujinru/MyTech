@@ -1,4 +1,4 @@
-package com.wd.tech.view.adapter;
+package com.wd.tech.view.adapter.messageadapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
+import com.wd.tech.bean.CommunityBean;
 import com.wd.tech.bean.FriendNoticeBean;
 import com.wd.tech.util.NetUtil;
 
@@ -31,7 +32,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
 
         this.result = result;
     }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

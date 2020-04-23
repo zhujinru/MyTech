@@ -25,4 +25,6 @@ public interface MyUrls {
     //资讯banner
     String BASE_BANNER="techApi/information/v1/bannerShow";
     String BASE_CONSULTSHOW="techApi/information/v1/infoRecommendList";
+    //社区列表
+    String COMMUNITYLIST="techApi/community/v1/findCommunityList";
 }

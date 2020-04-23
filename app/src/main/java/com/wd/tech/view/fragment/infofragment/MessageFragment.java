@@ -2,7 +2,6 @@ package com.wd.tech.view.fragment.infofragment;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +10,7 @@ import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.FriendNoticeBean;
 import com.wd.tech.presenter.TechPresenter;
-import com.wd.tech.view.adapter.MessageAdapter;
+import com.wd.tech.view.adapter.messageadapter.MessageAdapter;
 import com.wd.tech.widget.MyUrls;
 
 import java.util.HashMap;
