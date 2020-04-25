@@ -1,4 +1,4 @@
-package com.wd.tech.view.adapter.messageadapter;
+package com.wd.tech.view.adapter.messageadapter.message;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-import com.wd.tech.bean.CommunityBean;
 import com.wd.tech.bean.FriendNoticeBean;
 import com.wd.tech.util.NetUtil;
 

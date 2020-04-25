@@ -1,7 +1,11 @@
 package com.wd.tech.view.fragment.infofragment;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +14,14 @@ import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.FriendNoticeBean;
 import com.wd.tech.presenter.TechPresenter;
-import com.wd.tech.view.adapter.messageadapter.MessageAdapter;
+import com.wd.tech.view.adapter.messageadapter.message.MessageAdapter;
 import com.wd.tech.widget.MyUrls;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +36,8 @@ public class MessageFragment extends BaseFragment<TechPresenter> {
     int page = 1;
     int count = 5;
     @BindView(R.id.message_recy)
-    RecyclerView messageRecy;
+    SwipeMenuRecyclerView messageRecy;
+    private MessageAdapter messageAdapter;
 
     @Override
     protected void initView(View view) {
@@ -62,9 +73,32 @@ public class MessageFragment extends BaseFragment<TechPresenter> {
             List<FriendNoticeBean.ResultBean> result = ((FriendNoticeBean) o).getResult();
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             messageRecy.setLayoutManager(linearLayoutManager);
-            MessageAdapter messageAdapter = new MessageAdapter(result);
+            messageAdapter = new MessageAdapter(result);
+            messageRecy.setSwipeMenuCreator(new SwipeMenuCreator() {
+                @Override
+                public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
+
+                    @SuppressLint("ResourceType") SwipeMenuItem deleteItem = new SwipeMenuItem(getContext())
+                            .setBackground(R.drawable.redcolor)
+                            .setText("删除")
+                            .setHeight(ViewGroup.LayoutParams.MATCH_PARENT)//设置高，这里使用match_parent，就是与item的高相同
+                            .setWidth(70);//设置宽
+                    swipeRightMenu.addMenuItem(deleteItem);//设置右边的侧滑
+                }
+            });
+            messageRecy.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+                @Override
+                public void onItemClick(SwipeMenuBridge menuBridge) {
+                    menuBridge.closeMenu();
+                    int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
+                    result.remove(adapterPosition);
+                    messageAdapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+                }
+            });
             messageRecy.setAdapter(messageAdapter);
         }
+
     }
 
     @Override

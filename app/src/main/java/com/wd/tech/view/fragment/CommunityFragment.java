@@ -11,7 +11,6 @@ import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.CommunityBean;
 import com.wd.tech.presenter.TechPresenter;
 import com.wd.tech.view.adapter.communityadapter.CommunityAdapter;
-import com.wd.tech.view.adapter.messageadapter.MessageAdapter;
 import com.wd.tech.widget.MyUrls;
 
 import java.util.HashMap;

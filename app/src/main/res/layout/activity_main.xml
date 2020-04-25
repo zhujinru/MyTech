@@ -89,6 +89,7 @@
           android:visibility="gone"
           android:layout_width="match_parent"
           android:id="@+id/rl"
+          android:background="#ffffff"
           android:layout_height="match_parent">
           <ImageView
               android:layout_width="match_parent"

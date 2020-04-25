@@ -46,7 +46,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.MyVi
         CommunityBean.ResultBean resultBean = result.get(position);
         holder.comItemName.setText(resultBean.getNickName());
         holder.comItemNickname.setText(resultBean.getSignature());
-        NetUtil.getInstance().getPhoto(resultBean.getHeadPic(), holder.comItemImage);
+        NetUtil.getInstance().getCiclePhoto(resultBean.getHeadPic(), holder.comItemImage);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM:dd HH:mm");
         String format = simpleDateFormat.format(resultBean.getPublishTime());
         holder.comItemTime.setText(format);

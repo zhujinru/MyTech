@@ -27,4 +27,8 @@ public interface MyUrls {
     String BASE_CONSULTSHOW="techApi/information/v1/infoRecommendList";
     //社区列表
     String COMMUNITYLIST="techApi/community/v1/findCommunityList";
+    //查询分组
+    String BASE_FIND_ALLGROUP="techApi/chat/verify/v1/findFriendGroupList";
+    //查询分组下所有好友信息
+    String BASE_FINDMAN_BYGROUP="techApi/chat/verify/v1/findFriendListByGroupId";
 }
