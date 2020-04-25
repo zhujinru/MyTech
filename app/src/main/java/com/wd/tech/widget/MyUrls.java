@@ -31,4 +31,6 @@ public interface MyUrls {
     String BASE_FIND_ALLGROUP="techApi/chat/verify/v1/findFriendGroupList";
     //查询分组下所有好友信息
     String BASE_FINDMAN_BYGROUP="techApi/chat/verify/v1/findFriendListByGroupId";
+    //资讯所有列表
+    String CLASSIFICATION="techApi/information/v1/findAllInfoPlate?id&name&pic";
 }
