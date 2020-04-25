@@ -27,4 +27,6 @@ public interface MyUrls {
     String BASE_CONSULTSHOW="techApi/information/v1/infoRecommendList";
     //社区列表
     String COMMUNITYLIST="techApi/community/v1/findCommunityList";
+    //资讯所有列表
+    String CLASSIFICATION="techApi/information/v1/findAllInfoPlate?id&name&pic";
 }

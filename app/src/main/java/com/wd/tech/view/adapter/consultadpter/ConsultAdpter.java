@@ -1,4 +1,4 @@
-package com.wd.tech.view.adapter;
+package com.wd.tech.view.adapter.consultadpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import com.wd.tech.util.NetUtil;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
