@@ -1,33 +1,28 @@
 package com.wd.tech.view.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ImageView;
 
 
-import com.bumptech.glide.Glide;
 import com.stx.xhb.androidx.XBanner;
 import com.wd.tech.R;
-import com.wd.tech.view.activity.ConsultDetailsinfo.ConsultDetailsActivity;
-import com.wd.tech.view.activity.ConsultDetailsinfo.FindPlateActivity;
-import com.wd.tech.view.activity.Consult_Sousuo;
-import com.wd.tech.view.adapter.consultadpter.ConsultAdpter;
+
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.BannerBean;
 import com.wd.tech.bean.ConsultShowBean;
 import com.wd.tech.contract.TechContract;
 import com.wd.tech.presenter.TechPresenter;
 import com.wd.tech.util.NetUtil;
+
+import com.wd.tech.view.adapter.consultadpter.ConsultAdpter;
 import com.wd.tech.widget.MyUrls;
-import com.youth.banner.Banner;
-import com.youth.banner.loader.ImageLoader;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,21 +34,20 @@ import butterknife.OnClick;
  */
 public class ConsultFragment extends BaseFragment<TechPresenter> implements TechContract.IView {
 
-    List<ConsultShowBean.ResultBean>list=new ArrayList<>();
-    List<String> bannerlist=new ArrayList<>();
+    List<ConsultShowBean.ResultBean> list = new ArrayList<>();
     @BindView(R.id.consult_fenlei)
     ImageView consultFenlei;
     @BindView(R.id.consult_sousuo)
     ImageView consultSousuo;
-
+    @BindView(R.id.consult_banner)
+    XBanner xb;
     @BindView(R.id.cunsult_recyecyclerView)
     RecyclerView recyles;
-    private Banner xb;
 
 
     @Override
     protected void initView(View view) {
-        xb = (Banner)view.findViewById(R.id.consult_banner);
+
     }
 
     @Override
@@ -69,11 +63,10 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
     @Override
     protected void initData() {
         HashMap<String, Object> maps = new HashMap<>();
-        maps.put("plateId",5);
-        maps.put("page",1);
-        maps.put("count",5);
-    mPresenter.getDoParams(MyUrls.BASE_CONSULTSHOW,ConsultShowBean.class,maps);
-    mPresenter.getNoParams(MyUrls.BASE_BANNER,BannerBean.class);
+        maps.put("plateId", 1);
+        maps.put("page", 1);
+        maps.put("count", 10);
+        mPresenter.getDoParams(MyUrls.BASE_CONSULTSHOW, ConsultShowBean.class, maps);
     }
 
     @Override
@@ -83,39 +76,24 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
 
     @Override
     public void onSuccess(Object o) {
-    //Xbanner
+        //Xbanner
         if (o instanceof BannerBean) {
-            List<BannerBean.ResultBean> result = ((BannerBean) o).getResult();
-            for (int i = 0; i < result.size(); i++) {
-                bannerlist.add(result.get(i).getImageUrl());
-                Log.e("aaa","bannerlist"+result.get(i).getImageUrl());
-            }
-            xb.setImageLoader(new ImageLoader() {
+            final List<BannerBean.ResultBean> result = ((BannerBean) o).getResult();
+            xb.setBannerData(result);
+            xb.setAutoPlayAble(true);
+            xb.loadImage(new XBanner.XBannerAdapter() {
                 @Override
-                public void displayImage(Context context, Object path, ImageView imageView) {
-                    Glide.with(getActivity()).load(path).into(imageView);
+                public void loadBanner(XBanner banner, Object model, View view, int position) {
+                    String imageUrl = result.get(position).getImageUrl();
+                    NetUtil.getInstance().getPhoto(imageUrl, (ImageView) view);
                 }
-            }).setDelayTime(2000).setImages(bannerlist).start();
-            
+            });
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyles.setLayoutManager(linearLayoutManager);
-        ConsultAdpter adpter=new ConsultAdpter(list,getActivity());
-        adpter.setOnClickListeners(new ConsultAdpter.OnClickListeners() {
-            @Override
-            public void onClick(int movieId) {
-                Intent intent = new Intent(getActivity(), ConsultDetailsActivity.class);
-                intent.putExtra("id",movieId);
-                startActivity(intent);
-            }
-        });
+        ConsultAdpter adpter = new ConsultAdpter(list, getActivity());
         recyles.setAdapter(adpter);
-        if (o instanceof ConsultShowBean) {
-            list.clear();
-            list.addAll(((ConsultShowBean) o).getResult());
-        }
     }
-
 
 
     @Override
@@ -128,12 +106,8 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.consult_fenlei:
-                Intent intent1=new Intent(getActivity(), FindPlateActivity.class);
-                startActivity(intent1);
                 break;
             case R.id.consult_sousuo:
-                Intent intent=new Intent(getActivity(), Consult_Sousuo.class);
-                startActivity(intent);
                 break;
         }
     }
