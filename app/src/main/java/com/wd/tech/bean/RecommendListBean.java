@@ -1,21 +1,10 @@
 package com.wd.tech.bean;
 
 import java.util.List;
-
 /*
-/**
-*
-* @ProjectName: MyTech
-* @Package: com.wd.tech.bean
-* @ClassName: ConsultShowBean
-* @Author: 刘文
-* @CreateDate: 2020/4/22 下午12:25
-* @UpdateUser: 更新者
-* @UpdateDate: 2020/4/22 下午12:25
-* @UpdateRemark: 更新说明
-* @Version: 1.0
-*/
-public class ConsultShowBean {
+* 资讯列表实体类
+* */
+public class RecommendListBean {
 
     /**
      * result : [{"collection":5,"id":68,"releaseTime":1573023083000,"share":0,"source":"ITBEAR科技资讯","summary":"11月6日消息，今日在第二届中国国际进口博览会上，诺基亚与中国三大运营商分别签署2020年合作框架协议，总价值157亿元人民币。","thumbnail":"http://www.itbear.com.cn/upload/2019-11/191106170713291.jpg","title":"诺基亚与三大运营商分别签约，总价值157亿元","whetherAdvertising":2,"whetherCollection":2,"whetherPay":2},{"collection":4,"id":67,"releaseTime":1572936683000,"share":0,"source":"ITBEAR科技资讯","summary":"最近，百度李彦宏曾多次演示的小度人工智能音箱入驻了杭州市萧山区的一家盲人推拿店，给盲人按摩师带来了意想不到的帮助。","thumbnail":"http://www.itbear.com.cn/upload/2019-11/191106194329661.jpg","title":"这次是杭州！快来看李彦宏的\u201cAI助盲\u201d路线图","whetherAdvertising":2,"whetherCollection":2,"whetherPay":2},{"collection":5,"id":66,"releaseTime":1572850283000,"share":0,"source":"ITBEAR科技资讯","summary":"区块链技术正越来越广泛地应用到人民生活的各个方面。近期，国家互联网应急中心对国家电子合同备案平台进行了升级，正式上线区块链存证功能，并部署了多个监督节点。而据最新消息，迅雷以领先的区块链技术优势正式成为国家电子合同备案平台区块链监督网络的最新节点，也是继阿里、奇安信(原360企业安全)之后的第三个企业类节点。","thumbnail":"http://www.itbear.com.cn/upload/2019-09/190926152255071.png","title":"国家互联网应急中心联手迅雷 推动契约生态区块链化","whetherAdvertising":2,"whetherCollection":2,"whetherPay":2},{"collection":4,"id":65,"releaseTime":1572763883000,"share":2,"source":"ITBEAR科技资讯","summary":"双11在即，国内三大智能音箱品牌均面向用户大幅让利。天猫精灵X1和小米AI音箱到手价格均降至199元，带屏音箱天猫精灵CCL和小度在家1S到手价格低至299元，竞争进入肉搏战。","thumbnail":"http://www.itbear.com.cn/upload/2019-11/191106140480852.png","title":"2019年Q3智能音箱数据发布，天猫精灵再次国内第一","whetherAdvertising":2,"whetherCollection":2,"whetherPay":2},{"collection":0,"id":0,"infoAdvertisingVo":{"content":"八维教育","id":1,"pic":"http://mobile.bwstudent.com/images/tech/ad/bw.png","url":"http://www.bwie.com"},"share":0,"whetherAdvertising":1,"whetherCollection":0,"whetherPay":0}]

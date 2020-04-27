@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.classification_Activity"></activity>
+        <activity android:name=".view.activity.commmentinfo.commmentActivity"></activity>
+        <activity android:name=".view.activity.ConsultDetailsinfo.ChannelActivity" />
+        <activity android:name=".view.activity.ConsultDetailsinfo.FindPlateActivity" />
+        <activity android:name=".view.activity.ConsultDetailsinfo.PayIntegralActivity" />
+        <activity android:name=".view.activity.ConsultDetailsinfo.ConsultDetailsActivity" />
+        <activity android:name=".view.activity.classification_Activity" />
         <activity android:name=".view.activity.Consult_Sousuo" />
         <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".hr.LivenessActivity" />

@@ -1,15 +1,18 @@
 package com.wd.tech.view.fragment;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.CommunityBean;
 import com.wd.tech.presenter.TechPresenter;
+import com.wd.tech.view.activity.MainActivity;
 import com.wd.tech.view.adapter.communityadapter.CommunityAdapter;
 import com.wd.tech.widget.MyUrls;
 
@@ -17,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 社区
@@ -27,6 +31,9 @@ public class CommunityFragment extends BaseFragment<TechPresenter> {
     RecyclerView communityRecy;
     int page = 1;
     int count = 5;
+    @BindView(R.id.gotocommment)
+    FloatingActionButton gotocommment;
+
     @Override
     protected void initView(View view) {
 
@@ -69,5 +76,10 @@ public class CommunityFragment extends BaseFragment<TechPresenter> {
     @Override
     public void onFailure(Throwable e) {
 
+    }
+
+    @OnClick(R.id.gotocommment)
+    public void onViewClicked() {
+        startActivity(new Intent(getContext(),MainActivity.class));
     }
 }

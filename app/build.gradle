@@ -83,7 +83,10 @@ dependencies {
     implementation 'com.github.tyhjh:PermissionUtil:v1.0.5'
     implementation 'com.github.tyhjh:picturePickUtil:v1.0.6'
     //banner
-      implementation 'com.youth.banner:banner:1.4.9'
+    implementation 'com.youth.banner:banner:1.4.9'
     //swipe用于滑动删除
-    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+    implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+    //悬浮按钮   Android 5.0新控件——FloatingActionButton
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:23.1.1'
 }

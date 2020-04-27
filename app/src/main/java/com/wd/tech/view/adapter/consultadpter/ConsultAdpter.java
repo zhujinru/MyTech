@@ -50,11 +50,26 @@ public class ConsultAdpter extends RecyclerView.Adapter<ConsultAdpter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ConsultShowBean.ResultBean resultBean = list.get(position);
         holder.consultItemName.setText(list.get(position).getSource());
         holder.consultItemNeirong.setText(list.get(position).getSummary());
         holder.consultItemTime.setText(list.get(position).getReleaseTime()+"");
         NetUtil.getInstance().getPhoto(list.get(position).getThumbnail(),holder.consultItemImage);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //判断是否有阅读资格
+                if (resultBean.getWhetherAdvertising()==1){
+                    ConsultShowBean.ResultBean.InfoAdvertisingVoBean infoAdvertisingVo = resultBean.getInfoAdvertisingVo();
+                    int id = infoAdvertisingVo.getId();
+                    mOnClickListeners.onClick(id);
+                }else {
+                    mOnClickListeners.onClick(list.get(position).getId());
+                }
+
+            }
+        });
     }
 
     @Override
@@ -89,6 +104,6 @@ public class ConsultAdpter extends RecyclerView.Adapter<ConsultAdpter.ViewHolder
     }
 
     public  interface OnClickListeners{
-        void onClick(int movieId, int status);
+        void onClick(int movieId);
     }
 }

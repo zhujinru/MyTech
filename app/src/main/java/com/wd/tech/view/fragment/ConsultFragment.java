@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.stx.xhb.androidx.XBanner;
 import com.wd.tech.R;
+import com.wd.tech.view.activity.ConsultDetailsinfo.ConsultDetailsActivity;
+import com.wd.tech.view.activity.ConsultDetailsinfo.FindPlateActivity;
 import com.wd.tech.view.activity.Consult_Sousuo;
 import com.wd.tech.view.adapter.consultadpter.ConsultAdpter;
 import com.wd.tech.base.BaseFragment;
@@ -99,6 +101,14 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyles.setLayoutManager(linearLayoutManager);
         ConsultAdpter adpter=new ConsultAdpter(list,getActivity());
+        adpter.setOnClickListeners(new ConsultAdpter.OnClickListeners() {
+            @Override
+            public void onClick(int movieId) {
+                Intent intent = new Intent(getActivity(), ConsultDetailsActivity.class);
+                intent.putExtra("id",movieId);
+                startActivity(intent);
+            }
+        });
         recyles.setAdapter(adpter);
         if (o instanceof ConsultShowBean) {
             list.clear();
@@ -118,6 +128,8 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.consult_fenlei:
+                Intent intent1=new Intent(getActivity(), FindPlateActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.consult_sousuo:
                 Intent intent=new Intent(getActivity(), Consult_Sousuo.class);

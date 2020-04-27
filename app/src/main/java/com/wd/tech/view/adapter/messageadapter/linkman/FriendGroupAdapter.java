@@ -52,7 +52,7 @@ public class FriendGroupAdapter extends RecyclerView.Adapter<FriendGroupAdapter.
         int currentNumber = resultBean.getCurrentNumber();
         String groupName = resultBean.getGroupName();
         if (resultBean.isClosed()){
-            holder.iv.setImageResource(R.drawable.xia);
+            holder.iv.setImageResource(R.drawable.xiajiantou);
             holder.rc.setVisibility(View.GONE);
         }else {
             if (currentNumber==0){
@@ -60,7 +60,7 @@ public class FriendGroupAdapter extends RecyclerView.Adapter<FriendGroupAdapter.
             }else {
                 holder.rc.setVisibility(View.VISIBLE);
             }
-            holder.iv.setImageResource(R.drawable.shang);
+            holder.iv.setImageResource(R.drawable.shangjiantou);
 
         }
         holder.name.setText(groupName);
