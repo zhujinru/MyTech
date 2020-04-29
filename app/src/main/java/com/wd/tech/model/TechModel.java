@@ -7,6 +7,7 @@ import com.wd.tech.util.NetUtil;
 import java.util.HashMap;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * date:2020/4/18
@@ -103,6 +104,23 @@ public class TechModel implements TechContract.IModel {
             }
         });
     }
+
+    // TODO: 2020/4/27
+    @Override
+    public void postFileParams(String url, Class cls, HashMap<String, RequestBody> map, final TechContract.IModelCallback iModelCallback) {
+        NetUtil.getInstance().postFileParams(url, cls,map,new NetUtil.ICallback() {
+            @Override
+            public void onSuccess(Object o) {
+                iModelCallback.onSuccess(o);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                iModelCallback.onFailure(e);
+            }
+        });
+    }
+
     @Override
     public void putNoParams(String url, Class cls, final TechContract.IModelCallback iModelCallback) {
         NetUtil.getInstance().putNoParams(url, cls, new NetUtil.ICallback() {

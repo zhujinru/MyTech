@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.commmentinfo.commmentActivity"></activity>
+        <activity android:name=".view.activity.commmentinfo.CommUserActivity"></activity>
+        <activity android:name=".view.activity.commmentinfo.WriteFilmActivity" />
+        <activity android:name=".view.activity.commmentinfo.WritePostActivity" />
+        <activity android:name=".view.activity.commmentinfo.commmentActivity" />
         <activity android:name=".view.activity.ConsultDetailsinfo.ChannelActivity" />
         <activity android:name=".view.activity.ConsultDetailsinfo.FindPlateActivity" />
         <activity android:name=".view.activity.ConsultDetailsinfo.PayIntegralActivity" />
@@ -28,11 +31,11 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -7,6 +7,7 @@ import com.wd.tech.model.TechModel;
 import java.util.HashMap;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * date:2020/4/18
@@ -111,6 +112,23 @@ public class TechPresenter extends BasePresenter<TechContract.IView> implements 
             }
         });
     }
+
+    // TODO: 2020/4/27
+    @Override
+    public void postFileParams(String url, Class cls,HashMap<String, RequestBody> map) {
+        techModel.postFileParams(url, cls,map,new TechContract.IModelCallback() {
+            @Override
+            public void onSuccess(Object o) {
+                getView().onSuccess(o);
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                getView().onFailure(e);
+            }
+        });
+    }
+
     @Override
     public void putNoParams(String url, Class cls) {
         techModel.putNoParams(url, cls, new TechContract.IModelCallback() {
