@@ -47,7 +47,6 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
 
     List<ConsultShowBean.ResultBean> list = new ArrayList<>();
     List<String>bannerlist=new ArrayList<>();
-    List<String> bannerlist=new ArrayList<>();
     @BindView(R.id.consult_fenlei)
     ImageView consultFenlei;
     @BindView(R.id.consult_sousuo)
@@ -80,6 +79,7 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
         maps.put("page", 1);
         maps.put("count", 10);
         mPresenter.getDoParams(MyUrls.BASE_CONSULTSHOW, ConsultShowBean.class, maps);
+        mPresenter.getNoParams(MyUrls.BASE_BANNER,BannerBean.class);
     }
 
     @Override
@@ -117,15 +117,7 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
             }
         });
         recyles.setAdapter(adpter);
-        adpter.setOnClickListeners(new ConsultAdpter.OnClickListeners() {
-            @Override
-            public void onClick(int movieId) {
-                Intent intent = new Intent(getActivity(), ConsultDetailsActivity.class);
-                intent.putExtra("id",movieId);
-                startActivity(intent);
-            }
-        });
-        recyles.setAdapter(adpter);
+
         if (o instanceof ConsultShowBean) {
             list.clear();
             list.addAll(((ConsultShowBean) o).getResult());
@@ -145,9 +137,9 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
             case R.id.consult_fenlei:
                 Intent intent1 = new Intent(getActivity(), FindPlateActivity.class);
                 startActivity(intent1);
-                Toast.makeText(getContext(), "ceshi", Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getContext(), "ceshi", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(), FindPlateActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
             case R.id.consult_sousuo:
                 Intent intent = new Intent(getActivity(), Consult_Sousuo.class);

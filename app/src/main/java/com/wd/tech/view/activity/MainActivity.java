@@ -237,7 +237,6 @@ public class MainActivity extends BaseActivity<TechPresenter> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_iv:
-                break;
             case R.id.login:
                 startActivity(this, LoginActivity.class);
                 break;
