@@ -1,8 +1,10 @@
 package com.wd.tech.view.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,12 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import android.widget.Toast;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
@@ -31,6 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -84,7 +86,22 @@ public class MainActivity extends BaseActivity<TechPresenter> {
     RelativeLayout menu;
     @BindView(R.id.drawer)
     DrawerLayout drawer;
+    @BindView(R.id.text_shoucang)
+    TextView textShoucang;
+    @BindView(R.id.text_guanzhu)
+    TextView textGuanzhu;
+    @BindView(R.id.text_tiezi)
+    TextView textTiezi;
+    @BindView(R.id.text_tongzhi)
+    TextView textTongzhi;
+    @BindView(R.id.text_jifen)
+    TextView textJifen;
+    @BindView(R.id.text_renwu)
+    TextView textRenwu;
+    @BindView(R.id.text_shezhi)
+    TextView textShezhi;
     private SharedPreferences sp;
+    private UserInfoBean.ResultBean result;
 
     @Override
     protected void initData() {
@@ -166,7 +183,7 @@ public class MainActivity extends BaseActivity<TechPresenter> {
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
                 //主内容随着菜单移动
                 int width = drawerView.getWidth();
-                cont.setTranslationX(width*slideOffset);
+                cont.setTranslationX(width * slideOffset);
             }
 
             @Override
@@ -204,7 +221,7 @@ public class MainActivity extends BaseActivity<TechPresenter> {
     @Override
     public void onSuccess(Object o) {
         if (o instanceof UserInfoBean && TextUtils.equals("0000", ((UserInfoBean) o).getStatus())) {
-            UserInfoBean.ResultBean result = ((UserInfoBean) o).getResult();
+            result = ((UserInfoBean) o).getResult();
             NetUtil.getInstance().getCiclePhoto(result.getHeadPic(), headPic);
             name.setText(result.getNickName());
             dersign.setText(result.getSignature());
@@ -216,15 +233,25 @@ public class MainActivity extends BaseActivity<TechPresenter> {
 
     }
 
-
-    @OnClick({R.id.login_iv, R.id.login})
+    @OnClick({R.id.login_iv, R.id.login,R.id.text_shezhi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_iv:
+                break;
             case R.id.login:
                 startActivity(this, LoginActivity.class);
                 break;
+            case R.id.text_shezhi:
+                Intent intent=new Intent(MainActivity.this,My_Setup.class);
+                intent.putExtra("pic",result.getHeadPic());
+                Log.i("AAA",result.getHeadPic());
+                intent.putExtra("name",result.getNickName());
+                startActivity(intent);
+
+                break;
+
         }
     }
+
 
 }

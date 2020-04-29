@@ -3,7 +3,6 @@ package com.wd.tech.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -13,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
+import com.stx.xhb.androidx.XBanner;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.BannerBean;
@@ -23,6 +24,9 @@ import com.wd.tech.util.NetUtil;
 import com.wd.tech.view.activity.ConsultDetailsinfo.ConsultDetailsActivity;
 import com.wd.tech.view.activity.ConsultDetailsinfo.FindPlateActivity;
 import com.wd.tech.view.activity.Consult_Sousuo;
+
+import com.wd.tech.view.activity.ConsultDetailsinfo.ConsultDetailsActivity;
+import com.wd.tech.view.activity.ConsultDetailsinfo.FindPlateActivity;
 import com.wd.tech.view.adapter.consultadpter.ConsultAdpter;
 import com.wd.tech.widget.MyUrls;
 import com.youth.banner.Banner;
@@ -42,6 +46,7 @@ import butterknife.OnClick;
 public class ConsultFragment extends BaseFragment<TechPresenter> implements TechContract.IView {
 
     List<ConsultShowBean.ResultBean> list = new ArrayList<>();
+    List<String>bannerlist=new ArrayList<>();
     List<String> bannerlist=new ArrayList<>();
     @BindView(R.id.consult_fenlei)
     ImageView consultFenlei;
@@ -75,7 +80,6 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
         maps.put("page", 1);
         maps.put("count", 10);
         mPresenter.getDoParams(MyUrls.BASE_CONSULTSHOW, ConsultShowBean.class, maps);
-        mPresenter.getNoParams(MyUrls.BASE_BANNER,BannerBean.class);
     }
 
     @Override
@@ -87,10 +91,9 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
     public void onSuccess(Object o) {
         //Xbanner
         if (o instanceof BannerBean) {
-            List<BannerBean.ResultBean> result = ((BannerBean) o).getResult();
+            final List<BannerBean.ResultBean> result = ((BannerBean) o).getResult();
             for (int i = 0; i < result.size(); i++) {
                 bannerlist.add(result.get(i).getImageUrl());
-                Log.e("aaa","bannerlist"+result.get(i).getImageUrl());
             }
             xb.setImageLoader(new ImageLoader() {
                 @Override
@@ -100,9 +103,20 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
             }).setDelayTime(2000).setImages(bannerlist).start();
 
         }
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyles.setLayoutManager(linearLayoutManager);
         ConsultAdpter adpter=new ConsultAdpter(list,getActivity());
+        adpter.setOnClickListeners(new ConsultAdpter.OnClickListeners() {
+            @Override
+            public void onClick(int movieId) {
+                Intent intent = new Intent(getActivity(), ConsultDetailsActivity.class);
+                intent.putExtra("id",movieId);
+                startActivity(intent);
+            }
+        });
+        recyles.setAdapter(adpter);
         adpter.setOnClickListeners(new ConsultAdpter.OnClickListeners() {
             @Override
             public void onClick(int movieId) {
@@ -132,6 +146,8 @@ public class ConsultFragment extends BaseFragment<TechPresenter> implements Tech
                 Intent intent1 = new Intent(getActivity(), FindPlateActivity.class);
                 startActivity(intent1);
                 Toast.makeText(getContext(), "ceshi", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), FindPlateActivity.class);
+                startActivity(intent);
                 break;
             case R.id.consult_sousuo:
                 Intent intent = new Intent(getActivity(), Consult_Sousuo.class);
