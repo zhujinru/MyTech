@@ -43,10 +43,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
         FriendNoticeBean.ResultBean resultBean = result.get(position);
         holder.frName.setText(resultBean.getFromNickName());
         holder.frMessage.setText(resultBean.getRemark());
-        NetUtil.getInstance().getPhoto(resultBean.getFromHeadPic(),holder.frImg);
+        NetUtil.getInstance().getCiclePhoto(resultBean.getFromHeadPic(),holder.frImg);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM:dd HH:mm");
         String format = simpleDateFormat.format(resultBean.getNoticeTime());
         holder.frTime.setText(format);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OnMessageItemClickListener.onMessageItemClick(resultBean.getNoticeId(),resultBean.getFromHeadPic(),resultBean.getFromNickName());
+            }
+        });
     }
 
     @Override
@@ -69,5 +75,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    OnMessageItemClickListener OnMessageItemClickListener;
+
+    public void setOnMessageItemClickListener(MessageAdapter.OnMessageItemClickListener onMessageItemClickListener) {
+        OnMessageItemClickListener = onMessageItemClickListener;
+    }
+
+    public interface OnMessageItemClickListener{
+        void onMessageItemClick(int  id,String head,String name);
     }
 }

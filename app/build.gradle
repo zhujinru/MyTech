@@ -11,13 +11,25 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             //选择要添加的对应cpu类型的.so库。   // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
             abiFilters 'armeabi-v7a' //'armeabi-v7a',  'arm64-v8a'
             abiFilters 'armeabi' //'armeabi-v7a',  'arm64-v8a'
 //            moduleName "app"
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
+
+        //2
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "d4cf77f0d3b85e9edc540dee", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     buildTypes {
@@ -47,7 +59,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-
+    implementation 'com.android.support:multidex:1.0.3'
     //Gson包
     implementation 'com.google.code.gson:gson:2.4'
     //androidX 版本使用下面的依赖
@@ -91,4 +103,7 @@ dependencies {
     implementation 'com.android.support:design:23.1.1'
     //卡片布局
     implementation 'androidx.cardview:cardview:1.0.0'
+    //极光
+    implementation 'cn.jiguang.sdk:jmessage:2.9.0'  // 此处以JMessage 2.9.0 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.0.0'  // 此处以JCore 2.0.0 版本为例。
 }
