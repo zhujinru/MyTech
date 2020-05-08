@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
@@ -87,6 +88,7 @@ public class NetUtil {
                                     .addHeader("sessionId", sid)
                                     .build();
                             return  chain.proceed(request);
+                          //  Log.e("sessionId",sid+"");
                         }else {
                             return chain.proceed(chain.request());
                         }

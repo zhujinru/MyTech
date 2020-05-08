@@ -1,5 +1,6 @@
 package com.wd.tech.view.fragment.infofragment;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.FriendGroupBean;
 import com.wd.tech.bean.FriendListBean;
 import com.wd.tech.presenter.TechPresenter;
+import com.wd.tech.view.activity.Message.ChatMsgActivity;
 import com.wd.tech.view.adapter.messageadapter.linkman.FriendGroupAdapter;
 import com.wd.tech.widget.MyUrls;
 
@@ -97,6 +99,17 @@ public class LinkManFragment extends BaseFragment<TechPresenter> {
                         map.put("groupId",groupId);
                         //查询分组下所有好友
                         mPresenter.getDoParams(MyUrls.BASE_FINDMAN_BYGROUP, FriendListBean.class,map);
+                    }
+                });
+
+                friendGroupAdapter.setOnFrindClickListener(new FriendGroupAdapter.onFrindClickListener() {
+                    @Override
+                    public void onFrindClick(int id, String head, String name) {
+                        Intent intent = new Intent(getContext(), ChatMsgActivity.class);
+                        intent.putExtra("id",id);
+                        intent.putExtra("head",head);
+                        intent.putExtra("name",name);
+                        startActivity(intent);
                     }
                 });
                 linkManRc.setAdapter(friendGroupAdapter);

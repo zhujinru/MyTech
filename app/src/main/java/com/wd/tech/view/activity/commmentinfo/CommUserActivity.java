@@ -1,10 +1,14 @@
 package com.wd.tech.view.activity.commmentinfo;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,7 @@ public class CommUserActivity extends BaseActivity<TechPresenter> {
     @BindView(R.id.rc)
     RecyclerView rc;
     private int uid;
+    private Dialog dialog;
     @Override
     protected void initData() {
 
@@ -61,6 +66,7 @@ public class CommUserActivity extends BaseActivity<TechPresenter> {
             map.put("count", 10);
             mPresenter.getDoParams(MyUrls.BASE_USER_COM, CommUserBean.class, map);
         }
+        changePic();
     }
 
     @Override
@@ -95,8 +101,8 @@ public class CommUserActivity extends BaseActivity<TechPresenter> {
                     switch (tag) {
                         case 0:
                             CommUserBean.ResultBean.CommunityUserPostVoListBean listBena = result.get(0).getCommunityUserPostVoList().get(tion);
-                            String file = listBena.getFile();
-
+                            setDialog(listBena.getFile());
+                            dialog.show();
                             break;
                         case 1:
                             //点赞
@@ -140,6 +146,34 @@ public class CommUserActivity extends BaseActivity<TechPresenter> {
     @Override
     public void onFailure(Throwable e) {
 
+    }
+
+    private void changePic() {
+        //展示在dialog上面的大图
+        dialog = new Dialog(CommUserActivity.this, R.style.PicActivity);
+        WindowManager.LayoutParams attributes = getWindow().getAttributes();
+        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setAttributes(attributes);
+    }
+    public void setDialog(String uri){
+        ImageView image = getImageView(uri);
+        dialog.setContentView(image);
+
+        //大图的点击事件（点击让他消失）
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+    private ImageView getImageView(String uri){
+        ImageView imageView = new ImageView(this);
+        //宽高
+        imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        Glide.with(imageView).load(uri).into(imageView);
+        return imageView;
     }
     @OnClick({R.id.iv_head, R.id.more})
     public void onViewClicked(View view) {

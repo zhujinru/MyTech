@@ -20,6 +20,7 @@ import com.wd.tech.bean.LoginBean;
 import com.wd.tech.hr.LivenessActivity;
 import com.wd.tech.presenter.TechPresenter;
 import com.wd.tech.util.RsaCoder;
+import com.wd.tech.widget.MyApp;
 import com.wd.tech.widget.MyUrls;
 
 import java.util.HashMap;
@@ -27,6 +28,8 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 
 public class LoginActivity extends BaseActivity<TechPresenter> {
 
@@ -75,8 +78,31 @@ public class LoginActivity extends BaseActivity<TechPresenter> {
             edit.putBoolean("b",true);
             edit.putInt("uid",((LoginBean) o).getResult().getUserId());
             edit.putString("sid",((LoginBean) o).getResult().getSessionId());
+            edit.putString("head",((LoginBean) o).getResult().getHeadPic());
             Toast.makeText(this, ((LoginBean) o).getMessage(), Toast.LENGTH_SHORT).show();
             edit.commit();
+
+            JMessageClient.login(((LoginBean) o).getResult().getPhone(), MyApp.s2, new BasicCallback() {
+                @Override
+                public void gotResult(int i, String s) {
+                    switch (i) {
+                        case 801003:
+                            Toast.makeText(LoginActivity.this, "极光用户名不存在", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 871301:
+                            Toast.makeText(LoginActivity.this, "极光密码格式错误", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 801004:
+                            Toast.makeText(LoginActivity.this, "极光密码错误", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 0:
+                            Toast.makeText(LoginActivity.this, "极光登陆成功", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            });
+
+
             startActivity(LoginActivity.this, MainActivity.class);
             finish();
         }

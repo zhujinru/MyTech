@@ -1,6 +1,7 @@
 package com.wd.tech.view.fragment.infofragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.FriendNoticeBean;
 import com.wd.tech.presenter.TechPresenter;
+import com.wd.tech.view.activity.Message.ChatMsgActivity;
 import com.wd.tech.view.adapter.messageadapter.message.MessageAdapter;
 import com.wd.tech.widget.MyUrls;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
@@ -97,6 +99,17 @@ public class MessageFragment extends BaseFragment<TechPresenter> {
                 }
             });
             messageRecy.setAdapter(messageAdapter);
+            //消息点击跳转到聊天页面
+            messageAdapter.setOnMessageItemClickListener(new MessageAdapter.OnMessageItemClickListener() {
+                @Override
+                public void onMessageItemClick(int id, String head, String name) {
+                    Intent intent = new Intent(getContext(), ChatMsgActivity.class);
+                    intent.putExtra("id",id);
+                    intent.putExtra("head",head);
+                    intent.putExtra("name",name);
+                    startActivity(intent);
+                }
+            });
         }
 
     }

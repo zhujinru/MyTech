@@ -81,6 +81,14 @@ public class FriendGroupAdapter extends RecyclerView.Adapter<FriendGroupAdapter.
         if (child!=null){
             FriendChildAdapter friendChildAdapter = new FriendChildAdapter(child);
             holder.rc.setAdapter(friendChildAdapter);
+            friendChildAdapter.setOnClicksListener(new FriendChildAdapter.OnClicksListener() {
+                @Override
+                public void onClick(int id, String head, String name) {
+                    if (onFrindClickListener != null) {
+                        onFrindClickListener.onFrindClick(id,head,name);
+                    }
+                }
+            });
         }
 
 }
@@ -114,4 +122,15 @@ public class FriendGroupAdapter extends RecyclerView.Adapter<FriendGroupAdapter.
     public interface OnClickListener{
         void onClick(int position, int groupId);
     }
+
+    onFrindClickListener onFrindClickListener;
+
+    public void setOnFrindClickListener(FriendGroupAdapter.onFrindClickListener onFrindClickListener) {
+        this.onFrindClickListener = onFrindClickListener;
+    }
+
+    public interface onFrindClickListener{
+        void onFrindClick(int id,String head,String name);
+    }
+
 }

@@ -44,6 +44,14 @@ public class FriendChildAdapter extends RecyclerView.Adapter<FriendChildAdapter.
         NetUtil.getInstance().getPhoto(resultBean.getHeadPic(), holder.iv);
         holder.name.setText(resultBean.getNickName());
         holder.remark.setText(resultBean.getRemarkName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (OnClicksListener != null) {
+                    OnClicksListener.onClick(resultBean.getFriendUid(),resultBean.getHeadPic(),resultBean.getNickName());
+                }
+            }
+        });
     }
 
     @Override
@@ -64,5 +72,14 @@ public class FriendChildAdapter extends RecyclerView.Adapter<FriendChildAdapter.
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+    static OnClicksListener OnClicksListener;
+
+    public void setOnClicksListener(FriendChildAdapter.OnClicksListener onClicksListener) {
+        OnClicksListener = onClicksListener;
+    }
+
+    public interface OnClicksListener{
+        void onClick(int id, String head,String name);
     }
 }

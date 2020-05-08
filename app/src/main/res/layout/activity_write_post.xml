@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="取消"
         android:textSize="@dimen/sp_14"
-        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_10"
         android:id="@+id/comeback"/>
     <TextView
@@ -19,31 +19,32 @@
         android:text="发表"
         android:textSize="@dimen/sp_14"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_10"
         android:id="@+id/publish"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200"
-        android:paddingLeft="@dimen/dp_20"
-        android:paddingRight="@dimen/dp_20"
-        android:layout_margin="@dimen/dp_30"
+        android:layout_height="@dimen/dp_140"
         android:gravity="start"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_30"
         android:textSize="@dimen/sp_10"
         android:background="@drawable/infoselet"
         android:id="@+id/ed_content"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_200"
+        android:layout_marginTop="@dimen/dp_160"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_30"
         android:text="0/300"
         android:id="@+id/num"/>
     <ImageView
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"
-        android:layout_marginTop="@dimen/dp_250"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginTop="@dimen/dp_200"
         android:layout_marginLeft="@dimen/dp_30"
         android:id="@+id/iv"
         android:background="#fff"
